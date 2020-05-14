@@ -35,13 +35,32 @@ void push(int value)
  */
 void pall(void)
 {
-	while (global_stack->next != NULL)
-		global_stack = global_stack->next;
-
-	while (global_stack->prev != NULL)
+	if (global_stack)
 	{
+		while (global_stack->next != NULL)
+			global_stack = global_stack->next;
+
+		while (global_stack->prev != NULL)
+		{
+			printf("%d\n", global_stack->n);
+			global_stack = global_stack->prev;
+		}
 		printf("%d\n", global_stack->n);
-		global_stack = global_stack->prev;
 	}
-	printf("%d\n", global_stack->n);
+}
+
+/**
+ * pint - Prints the top of the stack
+ *
+ * Return: its void dummy
+ */
+void pint(void)
+{
+	if (global_stack)
+	{
+		while (global_stack->next != NULL)
+			global_stack = global_stack->next;
+
+		printf("%d\n", global_stack->n);
+	}
 }
