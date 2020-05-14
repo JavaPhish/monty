@@ -15,15 +15,18 @@ int monty_driver(char *parsed_line)
 		return (100);
 	copy = strcpy(copy, parsed_line);
 	token_line = tokenize_line(copy);
+
 	command = token_line[0];
+
 	if (token_line[1])
 		value = token_line[1];
 
 	status = call_function(command, value);
 
-	free(command);
-	if (value)
-		free(value);
+
+	free(token_line);
+	free(copy);
+
 	return (status);
 }
 

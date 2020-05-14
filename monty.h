@@ -65,8 +65,8 @@ int pchar(void);
 void pstr(void);
 
 /* useful stuff "monty_help.c" */
-void free_stack(stack_t *head);
 int is_all_whtspc(char *string);
+void free_stack(void);
 
 /* The stack */
 extern stack_t *global_stack;
