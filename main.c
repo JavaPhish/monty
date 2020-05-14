@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	while (fgets(raw_text_buffer, sizeof(raw_text_buffer), file_desc))
 	{
 		line_n++;
-		if (is_all_whtspc(raw_text_buffer) == 0)
+		if (is_all_whtspc(raw_text_buffer) == 0 && raw_text_buffer[0] != '#')
 		{
 			status = monty_driver(raw_text_buffer);
 			if (status != 1)
@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
+	fclose(file_desc);
 
 	if (status != 1)
 	{
