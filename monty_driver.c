@@ -27,7 +27,7 @@ int monty_driver(char *parsed_line)
 		pall();
 	else if (strcmp(command, "nop") == 0 || strcmp(command, "nop\n") == 0)
 		status = (1);
-	else if (strcmp(command, "pint\n") == 0 || strcmp(command, "pint\n") == 0)
+	else if (strcmp(command, "pint") == 0 || strcmp(command, "pint\n") == 0)
 		status = pint();
 	else
 	{
