@@ -2,9 +2,9 @@
 #define MONTY_HEAD_H
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <string.h>
@@ -57,6 +57,7 @@ int pop(void);
 int swap(void);
 int add(void);
 int sub(void);
+int op_div(void);
 
 /* useful stuff "monty_help.c" */
 void free_stack(stack_t *head);

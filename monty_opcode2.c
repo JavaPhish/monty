@@ -37,8 +37,8 @@ int add(void)
 
 /**
  * sub - Subracts the item at the top with the one below it
- * 
- * 
+ *
+ *
  * Return: 1 on success, 7 othwerwise
  */
 int sub(void)
@@ -69,4 +69,43 @@ int sub(void)
 	}
 
 	return (7);
+}
+
+/**
+ * div - Divides the top two elements
+ *
+ *
+ * Return: 1 on success, 8 otherwise, 9 when top is zero
+ */
+int op_div(void)
+{
+	int node1, node2;
+	stack_t *freed;
+
+	if (global_stack)
+	{
+		if (global_stack->next == NULL && global_stack->prev == NULL)
+		{
+			return (8);
+		}
+
+		while (global_stack->next != NULL)
+			global_stack = global_stack->next;
+
+		node1 = global_stack->n;
+		node2 = global_stack->prev->n;
+
+		if (node1 == 0)
+			return (9);
+
+		freed = global_stack;
+		global_stack = global_stack->prev;
+		free(freed);
+		global_stack->next = NULL;
+		global_stack->n = node2 / node1;
+
+		return (1);
+	}
+
+	return (8);
 }
