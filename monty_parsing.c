@@ -40,6 +40,8 @@ char **tokenize_line(char *line)
 	char *token = NULL, *tok_origin = NULL, **simple = NULL, *copy;
 	int tok_count = 0, cmd_iter = 0;
 
+	if (!line)
+		return (simple);
 	/* Find out how many seperate words/tokens exist for malloc */
 	tok_origin = token;
 	copy = malloc(sizeof(line));
@@ -93,6 +95,7 @@ char **sep_lines(char *raw)
 			line_count++;
 		loop++;
 	}
+	line_count++;
 	tok_out = malloc(line_count * sizeof(char *));
 	verify_malloc(tok_out);
 
@@ -105,12 +108,14 @@ char **sep_lines(char *raw)
 	line_tok = strtok(raw, "\n");
 	while (line_tok != NULL)
 	{
-		tok_out[loop] = malloc(sizeof(line_tok));
+		tok_out[loop] = malloc((strlen(line_tok) + 1) * sizeof(char));
 		verify_malloc(tok_out[loop]);
 		strcpy(tok_out[loop], line_tok);
+	
 		line_tok = strtok(NULL, "\n");
 		loop++;
 	}
+
 
 	/* free the garbage and return the finished 2d array */
 	free(ptr_origin);
