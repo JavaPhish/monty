@@ -53,6 +53,7 @@ void error_handler(int status, int line_n, char *line);
 int push(char *value);
 void pall();
 int pint(void);
+int pop(void);
 
 /* useful stuff "monty_help.c" */
 void free_stack(stack_t *head);

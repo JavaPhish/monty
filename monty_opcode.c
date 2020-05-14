@@ -76,3 +76,34 @@ int pint(void)
 	}
 	return (3);
 }
+
+/**
+ * pop - Removes the top value of the stack
+ * 
+ * Return: 1 on success, 4 otherwise
+ */
+int pop(void)
+{
+	stack_t *destroy_me;
+
+	if (global_stack == NULL)
+		return (4);
+
+	while (global_stack->next != NULL)
+		global_stack = global_stack->next;
+
+	if (global_stack->next == NULL && global_stack->prev == NULL)
+	{
+		free(global_stack);
+		global_stack = NULL;	
+	}
+	else
+	{
+		destroy_me = global_stack;
+		global_stack = global_stack->prev;
+		global_stack->next = NULL;
+		free(destroy_me);
+	}
+	
+	return (1);
+}

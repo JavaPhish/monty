@@ -29,10 +29,10 @@ int monty_driver(char *parsed_line)
 		status = (1);
 	else if (strcmp(command, "pint") == 0 || strcmp(command, "pint\n") == 0)
 		status = pint();
+	else if (strcmp(command, "pop") == 0 || strcmp(command, "pop\n") == 0)
+		status = pop();
 	else
-	{
 		status = 0;
-	}
 
 	free(command);
 	if (value)
@@ -57,7 +57,8 @@ void error_handler(int status, int line_n, char *line)
 		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
 	}
-
+	else if (status == 4)
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_n);
 	else if (status == 2)
 		fprintf(stderr, "L%d: usage: push integer\n", line_n);
 	else if (status == 100)
