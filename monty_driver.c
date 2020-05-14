@@ -35,6 +35,8 @@ int monty_driver(char *parsed_line)
 		status = swap();
 	else if (strcmp(command, "add") == 0 || strcmp(command, "add\n") == 0)
 		status = add();
+	else if ((strcmp(command, "sub") == 0 || strcmp(command, "sub\n") == 0))
+		status = sub();
 	else
 		status = 0;
 
@@ -62,6 +64,8 @@ void error_handler(int status, int line_n, char *line)
 		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
 	}
+	else if (status == 7)
+		fprintf(stderr, "L%d: can't sub, stack too short\n", line_n);
 	else if (status == 6)
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_n);
 	else if (status == 5)
