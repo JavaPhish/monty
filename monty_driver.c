@@ -31,6 +31,8 @@ int monty_driver(char *parsed_line)
 		status = pint();
 	else if (strcmp(command, "pop") == 0 || strcmp(command, "pop\n") == 0)
 		status = pop();
+	else if (strcmp(command, "swap") == 0 || strcmp(command, "swap\n") == 0)
+		status = swap();
 	else
 		status = 0;
 
@@ -57,6 +59,8 @@ void error_handler(int status, int line_n, char *line)
 		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
 	}
+	else if (status == 4)
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_n);
 	else if (status == 4)
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_n);
 	else if (status == 2)

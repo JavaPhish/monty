@@ -107,3 +107,33 @@ int pop(void)
 	
 	return (1);
 }
+
+/**
+ * swap - Swaps the top opcodes
+ *
+ * Return: 1 on success, 5 on failure
+ */
+int swap(void)
+{
+	int node1, node2;
+	if (global_stack)
+	{
+		if (global_stack->next == NULL && global_stack->prev == NULL)
+		{
+			return (5);
+		}
+
+		while (global_stack->next != NULL)
+			global_stack = global_stack->next;
+
+		node1 = global_stack->n;
+		node2 = global_stack->prev->n;
+
+		global_stack->n = node2;
+		global_stack->prev->n = node1; 
+
+		return (1);
+	}
+
+	return (5);
+}
