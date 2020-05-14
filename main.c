@@ -1,7 +1,6 @@
 #include "monty.h"
 
 stack_t *global_stack = NULL;
-char *opcode = NULL;
 
 /**
  * main - runs the monty script
@@ -12,7 +11,7 @@ char *opcode = NULL;
  */
 int main(int argc, char *argv[])
 {
-	char raw_text_buffer[256];
+	char raw_text_buffer[1024];
 	FILE *file_desc;
 	int line_n = 0, status = 1;
 
@@ -45,7 +44,7 @@ int main(int argc, char *argv[])
 
 	if (status != 1)
 	{
-		error_handler(status, line_n);
+		error_handler(status, line_n, raw_text_buffer);
 		exit(EXIT_FAILURE);
 	}
 

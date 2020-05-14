@@ -31,8 +31,6 @@ int monty_driver(char *parsed_line)
 		status = pint();
 	else
 	{
-		opcode = malloc(sizeof(command));
-		strcpy(opcode, command);
 		status = 0;
 	}
 
@@ -50,10 +48,16 @@ int monty_driver(char *parsed_line)
  *
  * Return: None
  */
-void error_handler(int status, int line_n)
+void error_handler(int status, int line_n, char *line)
 {
+	char *opcode;
+
 	if (status == 0)
+	{
+		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
+	}
+		
 	else if (status == 2)
 		fprintf(stderr, "L%d: usage: push integer\n", line_n);
 	else if (status == 100)

@@ -47,7 +47,7 @@ char **tokenize_line(char *line);
 
 /* Driving/Execution */
 int monty_driver(char *parsed_line);
-void error_handler(int status, int line_n);
+void error_handler(int status, int line_n, char *line);
 
 /* Op code functions. No im not using your function pointers go away */
 int push(char *value);
@@ -60,6 +60,5 @@ int is_all_whtspc(char *string);
 
 /* The stack */
 extern stack_t *global_stack;
-extern char *opcode;
 
 #endif
