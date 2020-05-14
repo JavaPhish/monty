@@ -48,6 +48,7 @@ char **tokenize_line(char *line);
 /* Driving/Execution */
 int monty_driver(char *parsed_line);
 void error_handler(int status, int line_n, char *line);
+int call_function(char *opcode, char *value);
 
 /* Op code functions. No im not using your function pointers go away */
 int push(char *value);
@@ -61,6 +62,7 @@ int op_div(void);
 int mul(void);
 int mod(void);
 int pchar(void);
+void pstr(void);
 
 /* useful stuff "monty_help.c" */
 void free_stack(stack_t *head);

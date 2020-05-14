@@ -18,37 +18,58 @@ int monty_driver(char *parsed_line)
 	command = token_line[0];
 	if (token_line[1])
 		value = token_line[1];
-	if (strcmp(command, "push") == 0)
-		status = push(value);
-	else if (strcmp(command, "pall") == 0 || strcmp(command, "pall\n") == 0)
-		pall();
-	else if (strcmp(command, "nop") == 0 || strcmp(command, "nop\n") == 0)
-		status = (1);
-	else if (strcmp(command, "pint") == 0 || strcmp(command, "pint\n") == 0)
-		status = pint();
-	else if (strcmp(command, "pop") == 0 || strcmp(command, "pop\n") == 0)
-		status = pop();
-	else if (strcmp(command, "swap") == 0 || strcmp(command, "swap\n") == 0)
-		status = swap();
-	else if (strcmp(command, "add") == 0 || strcmp(command, "add\n") == 0)
-		status = add();
-	else if ((strcmp(command, "sub") == 0 || strcmp(command, "sub\n") == 0))
-		status = sub();
-	else if ((strcmp(command, "div") == 0 || strcmp(command, "div\n") == 0))
-		status = op_div();
-	else if ((strcmp(command, "mul") == 0 || strcmp(command, "mul\n") == 0))
-		status = mul();
-	else if ((strcmp(command, "mod") == 0 || strcmp(command, "mod\n") == 0))
-		status = mod();
-	else if ((strcmp(command, "pchar") == 0 || strcmp(command, "pchar\n") == 0))
-		status = pchar();
-	else
-		status = 0;
+
+	status = call_function(command, value);
+
 	free(command);
 	if (value)
 		free(value);
 	return (status);
 }
+
+/**
+ * call_function - Calls the proper function
+ * @opcode: the opcode called
+ * @value: its value (if any)
+ *
+ * Return: The status returned
+ */
+int call_function(char *opcode, char *value)
+{
+	int status = 1;
+
+	if (strcmp(opcode, "push") == 0)
+		status = push(value);
+	else if (strcmp(opcode, "pall") == 0 || strcmp(opcode, "pall\n") == 0)
+		pall();
+	else if (strcmp(opcode, "nop") == 0 || strcmp(opcode, "nop\n") == 0)
+		status = (1);
+	else if (strcmp(opcode, "pint") == 0 || strcmp(opcode, "pint\n") == 0)
+		status = pint();
+	else if (strcmp(opcode, "pop") == 0 || strcmp(opcode, "pop\n") == 0)
+		status = pop();
+	else if (strcmp(opcode, "swap") == 0 || strcmp(opcode, "swap\n") == 0)
+		status = swap();
+	else if (strcmp(opcode, "add") == 0 || strcmp(opcode, "add\n") == 0)
+		status = add();
+	else if ((strcmp(opcode, "sub") == 0 || strcmp(opcode, "sub\n") == 0))
+		status = sub();
+	else if ((strcmp(opcode, "div") == 0 || strcmp(opcode, "div\n") == 0))
+		status = op_div();
+	else if ((strcmp(opcode, "mul") == 0 || strcmp(opcode, "mul\n") == 0))
+		status = mul();
+	else if ((strcmp(opcode, "mod") == 0 || strcmp(opcode, "mod\n") == 0))
+		status = mod();
+	else if ((strcmp(opcode, "pchar") == 0 || strcmp(opcode, "pchar\n") == 0))
+		status = pchar();
+	else if ((strcmp(opcode, "pstr") == 0 || strcmp(opcode, "pstr\n") == 0))
+		pstr();
+	else
+		status = 0;
+
+	return (status);
+}
+
 
 /**
  * error_handler - Using the status value, it determines the error message
