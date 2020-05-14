@@ -30,9 +30,9 @@ char *read_file(char *filename)
 }
 
 /**
- * tokenize_line - Converts a line into a 2d array with each argument in its own slot
+ * tokenize_line - Converts a line into a 2d array with each argument sep
  * @line: THe line to tokenize
- * 
+ *
  * Return: The 2d array of arguments/tokens
  */
 char **tokenize_line(char *line)
@@ -68,7 +68,7 @@ char **tokenize_line(char *line)
 		cmd_iter++;
 		token = strtok(NULL, " ");
 	}
-	
+
 	free(tok_origin);
 
 	return (simple);

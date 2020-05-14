@@ -28,14 +28,12 @@ void free_stack(stack_t *head)
 /**
  * verify_malloc - Verify integrity of a malloc
  * @mal: The memory allocated
- * 
+ *
  * Return: 1 if it was successful, 0 otherwise (Also it just exists so)
  */
 int verify_malloc(void *mal)
 {
-	/* I made this to save lines and to make code cleaner. I didnt wanna have
-	to manually write this after each malloc so i made a function to make it
-	a lot smoother. */
+
 	if (!mal)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -47,7 +45,7 @@ int verify_malloc(void *mal)
 /**
  * free2d_str - Frees a 2d array of strings
  * @arr: String to free
- * 
+ *
  * Return: Nothing. Nerd.
  */
 void free2d_str(char **arr)

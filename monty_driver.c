@@ -33,7 +33,6 @@ void monty_driver(char **parsed_lines)
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_n + 1, command);
 			exit(EXIT_FAILURE);
 		}
-		
 	}
 	free(command);
 	free(value);
