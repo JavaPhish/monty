@@ -1,60 +1,21 @@
 #include "monty.h"
 
-/**
- * free_stack - Frees the stack
- * @head: the list to free from its digital prison
- *
- * Return: None, noob.
- */
-void free_stack(stack_t *head)
-{
-	stack_t *tail;
-
-	if (!head)
-		exit(1);
-
-	while (head->prev)
-		head = head->prev;
-
-	while (head)
-	{
-		tail = head;
-		head = head->next;
-		free(tail);
-	}
-}
 
 /**
- * verify_malloc - Verify integrity of a malloc
- * @mal: The memory allocated
+ * is_all_whtspc - Returns if a string is all whitespace
+ * @string: THe string to check
  *
- * Return: 1 if it was successful, 0 otherwise (Also it just exists so)
+ * Return: 1 if a string is all wtspc, 0 otherwise
  */
-int verify_malloc(void *mal)
+int is_all_whtspc(char *string)
 {
+	int iter = 0;
 
-	if (!mal)
-	{
-		fprintf(stderr, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+	if (string == NULL)
+		return (1);
+	for (; string[iter] != '\0'; iter++)
+		if (isspace(string[iter]) == 0)
+			return (0);
+
 	return (1);
-}
-
-/**
- * free2d_str - Frees a 2d array of strings
- * @arr: String to free
- *
- * Return: Nothing. Nerd.
- */
-void free2d_str(char **arr)
-{
-	int freeme = 0;
-
-	while (arr[freeme])
-	{
-		free(arr[freeme]);
-		freeme++;
-	}
-	free(arr);
 }

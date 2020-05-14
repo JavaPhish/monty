@@ -1,38 +1,63 @@
 #include "monty.h"
 
 /**
- * monty_driver - Runs through all commands and executes them
- * @parsed_lines: THe lines to execute
+ * monty_driver - Main exeuction handler
+ * @parsed_line: The line to executre
  *
- * Return: It says void.
+ * Return: 1 on success or 0 depending on error code
  */
-void monty_driver(char **parsed_lines)
+int monty_driver(char *parsed_line)
 {
-	int line_n;
-	char *command, **tok_l, *value = NULL;
+	char **token_line;
+	char *command, *value = NULL, *copy;
+	int status = 1;
 
-	for (line_n = 0; parsed_lines[line_n]; line_n++)
+	copy = malloc(sizeof(parsed_line));
+	if (!copy)
+		return (100);
+	copy = strcpy(copy, parsed_line);
+	token_line = tokenize_line(copy);
+	command = token_line[0];
+	if (token_line[1])
+		value = token_line[1];
+
+	if (strcmp(command, "push") == 0)
+		status = push(value);
+	else if (strcmp(command, "pall") == 0 || strcmp(command, "pall\n") == 0)
+		pall();
+	else if (strcmp(command, "nop") == 0 || strcmp(command, "nop\n") == 0)
+		status = (1);
+	else if (strcmp(command, "pint\n") == 0 || strcmp(command, "pint\n") == 0)
+		status = pint();
+	else
 	{
-		tok_l = tokenize_line(parsed_lines[line_n]);
-
-		command = tok_l[0];
-
-		if (tok_l[1])
-			value = tok_l[1];
-
-		if (strcmp(command, "push") == 0)
-			push(atoi(value));
-		else if (strcmp(command, "pall") == 0)
-			pall();
-		else if (strcmp(command, "nop") == 0)
-			continue;
-		else
-		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_n + 1, command);
-			exit(EXIT_FAILURE);
-		}
+		opcode = malloc(sizeof(command));
+		strcpy(opcode, command);
+		status = 0;
 	}
+
 	free(command);
-	free(value);
-	free2d_str(tok_l);
+	if (value)
+		free(value);
+
+	return (status);
+}
+
+/**
+ * error_handler - Using the status value, it determines the error message
+ * @status: The error to display
+ * @line_n: The line the error occured at (Might be ignored)
+ *
+ * Return: None
+ */
+void error_handler(int status, int line_n)
+{
+	if (status == 0)
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
+	else if (status == 2)
+		fprintf(stderr, "L%d: usage: push integer\n", line_n);
+	else if (status == 100)
+		fprintf(stderr, "Error: malloc failed\n");
+	else if (status == 3)
+		fprintf(stderr, "L%d: can't pint, stack empty\n", line_n);
 }

@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <ctype.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -45,19 +46,20 @@ char *read_file(char *filename);
 char **tokenize_line(char *line);
 
 /* Driving/Execution */
-void monty_driver(char **parsed_lines);
+int monty_driver(char *parsed_line);
+void error_handler(int status, int line_n);
 
 /* Op code functions. No im not using your function pointers go away */
-void push(int value);
+int push(char *value);
 void pall();
+int pint(void);
 
 /* useful stuff "monty_help.c" */
-int _contains(char *str, char *keyword);
-void free2d_str(char **arr);
-int verify_malloc(void *mal);
 void free_stack(stack_t *head);
+int is_all_whtspc(char *string);
 
 /* The stack */
 extern stack_t *global_stack;
+extern char *opcode;
 
 #endif
