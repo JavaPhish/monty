@@ -1,6 +1,25 @@
 #include "monty.h"
 
 /**
+ * is_all_whtspc - Returns if a string is all whitespace
+ * @string: THe string to check
+ *
+ * Return: 1 if a string is all wtspc, 0 otherwise
+ */
+int is_all_whtspc(char *string)
+{
+	int iter = 0;
+
+	if (string == NULL)
+		return (1);
+	for (; string[iter] != '\0'; iter++)
+		if (isspace(string[iter]) == 0)
+			return (0);
+
+	return (1);
+}
+
+/**
  * read_file - Reads and outputs the contents of a file
  * @filename: The file to read
  *
@@ -25,6 +44,7 @@ char *read_file(char *filename)
 	char_count = st.st_size;
 	raw_text_buffer = malloc(char_count);
 	read(file_stat, raw_text_buffer, char_count);
+	close(file_stat);
 
 	return (raw_text_buffer);
 }
@@ -70,9 +90,7 @@ char **tokenize_line(char *line)
 		cmd_iter++;
 		token = strtok(NULL, " ");
 	}
-
 	free(tok_origin);
-
 	return (simple);
 }
 
@@ -88,37 +106,36 @@ char **sep_lines(char *raw)
 	char *line_tok = NULL, *ptr_origin;
 	int line_count = 0, loop = 0;
 
-	/* Find out how many lines so we can allocated the X of the 2d array */
 	while (raw[loop] != '\0')
 	{
 		if (raw[loop] == '\n')
 			line_count++;
 		loop++;
 	}
-	line_count += 2;
+	line_count += 1;
 	tok_out = malloc(line_count * sizeof(char *));
 	verify_malloc(tok_out);
-
-	/**
-	 * Copy each line into the Y of the 2d array by
-	 * using strtok with the /n as the delimiter
-	 */
 	loop = 0;
 	ptr_origin = line_tok;
 	line_tok = strtok(raw, "\n");
-	while (line_tok != NULL)
+	while (line_count > 0)
 	{
+		if (is_all_whtspc(line_tok) == 1 && line_tok == NULL)
+		{
+			tok_out[loop] = "   ";
+			loop++;
+			line_count--;
+			line_tok = strtok(NULL, "\n");
+			continue;
+		}
 		tok_out[loop] = malloc((strlen(line_tok) + 1) * sizeof(char));
 		verify_malloc(tok_out[loop]);
 		strcpy(tok_out[loop], line_tok);
 		line_tok = strtok(NULL, "\n");
 		loop++;
+		line_count--;	
 	}
-
-
-	/* free the garbage and return the finished 2d array */
 	free(ptr_origin);
 	free(line_tok);
-
 	return (tok_out);
 }
