@@ -60,6 +60,7 @@ int sub(void);
 int op_div(void);
 int mul(void);
 int mod(void);
+int pchar(void);
 
 /* useful stuff "monty_help.c" */
 void free_stack(stack_t *head);

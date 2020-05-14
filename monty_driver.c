@@ -8,10 +8,9 @@
  */
 int monty_driver(char *parsed_line)
 {
-	char **token_line, *command, *value = NULL, *copy;
+	char **token_line, *command, *value, *copy = malloc(sizeof(parsed_line));
 	int status = 1;
 
-	copy = malloc(sizeof(parsed_line));
 	if (!copy)
 		return (100);
 	copy = strcpy(copy, parsed_line);
@@ -41,6 +40,8 @@ int monty_driver(char *parsed_line)
 		status = mul();
 	else if ((strcmp(command, "mod") == 0 || strcmp(command, "mod\n") == 0))
 		status = mod();
+	else if ((strcmp(command, "pchar") == 0 || strcmp(command, "pchar\n") == 0))
+		status = pchar();
 	else
 		status = 0;
 	free(command);
@@ -66,6 +67,10 @@ void error_handler(int status, int line_n, char *line)
 		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
 	}
+	else if (status == 14)
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_n);
+	else if (status == 13)
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_n);
 	else if (status == 11)
 		fprintf(stderr, "L%d: can't mod, stack too short\n", line_n);
 	else if (status == 12)
