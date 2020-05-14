@@ -36,13 +36,13 @@ void push(int value)
 void pall(void)
 {
 
-	while (global_stack->prev != NULL)
-		global_stack = global_stack->prev;
-
 	while (global_stack->next != NULL)
+		global_stack = global_stack->next;
+
+	while (global_stack->prev != NULL)
 	{
 		printf("%d\n", global_stack->n);
-		global_stack = global_stack->next;
+		global_stack = global_stack->prev;
 	}
 	printf("%d\n", global_stack->n);
 }
