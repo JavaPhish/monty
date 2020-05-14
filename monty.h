@@ -58,6 +58,7 @@ int swap(void);
 int add(void);
 int sub(void);
 int op_div(void);
+int mul(void);
 
 /* useful stuff "monty_help.c" */
 void free_stack(stack_t *head);

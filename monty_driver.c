@@ -37,6 +37,8 @@ int monty_driver(char *parsed_line)
 		status = sub();
 	else if ((strcmp(command, "div") == 0 || strcmp(command, "div\n") == 0))
 		status = op_div();
+	else if ((strcmp(command, "mul") == 0 || strcmp(command, "mul\n") == 0))
+		status = mul();
 	else
 		status = 0;
 
@@ -64,6 +66,8 @@ void error_handler(int status, int line_n, char *line)
 		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
 	}
+	else if (status == 10)
+		fprintf(stderr, "L%d: can't mul, stack too short\n", line_n);
 	else if (status == 9)
 		fprintf(stderr, "L%d: division by zero\n", line_n);
 	else if (status == 8)

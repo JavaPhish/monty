@@ -72,7 +72,7 @@ int sub(void)
 }
 
 /**
- * div - Divides the top two elements
+ * op_div - Divides the top two elements
  *
  *
  * Return: 1 on success, 8 otherwise, 9 when top is zero
@@ -108,4 +108,40 @@ int op_div(void)
 	}
 
 	return (8);
+}
+
+/**
+ * mul - Multiplies top two elements in stack
+ *
+ *
+ * Return: 1 on success, 10 otherwise
+ */
+int mul(void)
+{
+	int node1, node2;
+	stack_t *freed;
+
+	if (global_stack)
+	{
+		if (global_stack->next == NULL && global_stack->prev == NULL)
+		{
+			return (10);
+		}
+
+		while (global_stack->next != NULL)
+			global_stack = global_stack->next;
+
+		node1 = global_stack->n;
+		node2 = global_stack->prev->n;
+
+		freed = global_stack;
+		global_stack = global_stack->prev;
+		free(freed);
+		global_stack->next = NULL;
+		global_stack->n = node2 * node1;
+
+		return (1);
+	}
+
+	return (10);
 }
