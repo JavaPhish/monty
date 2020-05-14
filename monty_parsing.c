@@ -95,7 +95,7 @@ char **sep_lines(char *raw)
 			line_count++;
 		loop++;
 	}
-	line_count++;
+	line_count += 2;
 	tok_out = malloc(line_count * sizeof(char *));
 	verify_malloc(tok_out);
 
@@ -111,7 +111,7 @@ char **sep_lines(char *raw)
 		tok_out[loop] = malloc((strlen(line_tok) + 1) * sizeof(char));
 		verify_malloc(tok_out[loop]);
 		strcpy(tok_out[loop], line_tok);
-	
+		printf("%s\n", tok_out[loop]);
 		line_tok = strtok(NULL, "\n");
 		loop++;
 	}
