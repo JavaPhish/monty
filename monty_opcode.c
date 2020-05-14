@@ -35,7 +35,6 @@ void push(int value)
  */
 void pall(void)
 {
-
 	while (global_stack->next != NULL)
 		global_stack = global_stack->next;
 
