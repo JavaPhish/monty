@@ -79,7 +79,7 @@ int pint(void)
 
 /**
  * pop - Removes the top value of the stack
- * 
+ *
  * Return: 1 on success, 4 otherwise
  */
 int pop(void)
@@ -95,7 +95,7 @@ int pop(void)
 	if (global_stack->next == NULL && global_stack->prev == NULL)
 	{
 		free(global_stack);
-		global_stack = NULL;	
+		global_stack = NULL;
 	}
 	else
 	{
@@ -104,7 +104,7 @@ int pop(void)
 		global_stack->next = NULL;
 		free(destroy_me);
 	}
-	
+
 	return (1);
 }
 
@@ -116,6 +116,7 @@ int pop(void)
 int swap(void)
 {
 	int node1, node2;
+
 	if (global_stack)
 	{
 		if (global_stack->next == NULL && global_stack->prev == NULL)
@@ -130,7 +131,7 @@ int swap(void)
 		node2 = global_stack->prev->n;
 
 		global_stack->n = node2;
-		global_stack->prev->n = node1; 
+		global_stack->prev->n = node1;
 
 		return (1);
 	}

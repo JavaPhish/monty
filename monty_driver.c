@@ -33,6 +33,8 @@ int monty_driver(char *parsed_line)
 		status = pop();
 	else if (strcmp(command, "swap") == 0 || strcmp(command, "swap\n") == 0)
 		status = swap();
+	else if (strcmp(command, "add") == 0 || strcmp(command, "add\n") == 0)
+		status = add();
 	else
 		status = 0;
 
@@ -47,7 +49,8 @@ int monty_driver(char *parsed_line)
  * error_handler - Using the status value, it determines the error message
  * @status: The error to display
  * @line_n: The line the error occured at (Might be ignored)
- *
+ * @line: The line GUILTY 
+ * 
  * Return: None
  */
 void error_handler(int status, int line_n, char *line)
@@ -59,7 +62,9 @@ void error_handler(int status, int line_n, char *line)
 		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
 	}
-	else if (status == 4)
+	else if (status == 6)
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_n);
+	else if (status == 5)
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_n);
 	else if (status == 4)
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_n);

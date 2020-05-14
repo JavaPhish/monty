@@ -55,6 +55,7 @@ void pall();
 int pint(void);
 int pop(void);
 int swap(void);
+int add(void);
 
 /* useful stuff "monty_help.c" */
 void free_stack(stack_t *head);
