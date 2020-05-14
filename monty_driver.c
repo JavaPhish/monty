@@ -11,14 +11,12 @@ void monty_driver(char **parsed_lines)
 	int line_n;
 	char *command, **tok_l, *value = NULL;
 
-	for (line_n = 0; parsed_lines[line_n] != NULL; line_n++)
+	for (line_n = 0; parsed_lines[line_n]; line_n++)
 	{
 		tok_l = tokenize_line(parsed_lines[line_n]);
 
-		if (tok_l[0])
-			command = tok_l[0];
-		else
-			command = "nop";
+		command = tok_l[0];
+
 		if (tok_l[1])
 			value = tok_l[1];
 
