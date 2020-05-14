@@ -57,7 +57,7 @@ void error_handler(int status, int line_n, char *line)
 		opcode = tokenize_line(line)[0];
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_n, opcode);
 	}
-		
+
 	else if (status == 2)
 		fprintf(stderr, "L%d: usage: push integer\n", line_n);
 	else if (status == 100)

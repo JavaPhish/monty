@@ -10,6 +10,7 @@ char **tokenize_line(char *line)
 {
 	char *token = NULL, *tok_origin = NULL, **simple = NULL, *copy;
 	int tok_count = 0, cmd_iter = 0;
+
 	if (!line)
 		return (simple);
 	/* Find out how many seperate words/tokens exist for malloc */
